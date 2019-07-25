@@ -14,13 +14,23 @@ class administrativeRolesTest extends TestCase
     /** @test */
     public function a_user_should_be_able_to_upload_a_video()
     {
-        $video = factory('App\Video')->raw();
+        $video = factory('App\Video')->create();
 
-        $this->post('/starrecords/videos', $video)
+        $this->post('/starrecords/videos', $video->toArray())
 
                 ->assertRedirect('/starrecords');
 
-        $this->assertDatabaseHas('videos', $video);
+        $this->assertDatabaseHas('videos', $video->toArray());
+
+        $this->get('/starrecords/videos')
+
+                ->assertSee($video->title)
+
+                ->assertSee($video->thumb_nail)
+
+                ->assertSee($video->url);
+
+
     }
 
     /** @test */
@@ -176,7 +186,5 @@ class administrativeRolesTest extends TestCase
 
         $this->assertDatabaseMissing('tours', $tour);
     }
-
-
 
 }

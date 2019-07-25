@@ -1,99 +1,202 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
+@section('content')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+  @section('header')
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area">
+    <!-- Main Header Start -->
+    <div class="main-header-area">
+      <div class="classy-nav-container breakpoint-off">
+        <!-- Classy Menu -->
+        <nav class="classy-navbar justify-content-between" id="pocaNav">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+          <!-- Logo -->
+          <a class="nav-brand" href="#"><span style="color:#fff;">Lee-Nation</span><span style="width:0.5rem; height:0.5rem; display:inline-block;border-radius:50%;background:red;margin-left:0.2rem;"></span></a>
 
-            .full-height {
-                height: 100vh;
-            }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+          <!-- Navbar Toggler -->
+          <div class="classy-navbar-toggler">
+            <span class="navbarToggler"><span></span><span></span><span></span></span>
+          </div>
 
-            .position-ref {
-                position: relative;
-            }
+          <!-- Menu -->
+          <div class="classy-menu">
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+            <!-- Menu Close Button -->
+            <div class="classycloseIcon">
+              <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+            </div>
 
-            .content {
-                text-align: center;
-            }
+            <!-- Nav Start -->
 
-            .title {
-                font-size: 84px;
-            }
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
+                <div class="classynav">
+                @if (Route::has('login'))
+                <ul id="nav">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <li class="current-item"><a href="{{ url('/starrecords') }}">Home</a></li>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        {{-- <li><a href="{{ route('login') }}">Login</a></li> --}}
+                        <li data-toggle="modal" data-target="#loginModal"><a href="{{ route('login') }}">Login</a></li>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <li><a href="{{ route('register') }}">Register</a></li>
                         @endif
                     @endauth
+                </ul>
                 </div>
             @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+            <!-- Nav End -->
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+  <!-- ***** Welcome Area Start ***** -->
+  <section class="welcome-area">
+    <!-- Welcome Slides -->
+    <div class="welcome-slides owl-carousel" style="height:100vh; background:#000;">
+
+      <!-- Single Welcome Slide -->
+      <div class="welcome-welcome-slide bg-img bg-overlay" style="background-image: url(img/bg-img/1.jpg);">
+        <div class="container h-100">
+          <div class="row h-100 align-items-center">
+            <div class="col-12">
+              <!-- Welcome Text -->
+              <div class="welcome-text">
+                <h2 data-animation="fadeInUp" data-delay="100ms">Oliver twist</h2>
+                <h5 data-animation="fadeInUp" data-delay="300ms">Make a dance video for oliver twist to stand a chance of winning cash prizes... Oshey!!</h5>
+              </div>
+              <!-- Welcome Music Area -->
+              <div class="poca-music-area mt-100 d-flex align-items-center flex-wrap" data-animation="fadeInUp" data-delay="900ms">
+                <div class="poca-music-thumbnail">
+                  <img src="./img/bg-img/4.jpg" alt="">
                 </div>
+                <div class="poca-music-content">
+                  <span class="music-published-date">Nov 9, 2018</span>
+                  <h2>Oliver Twist</h2>
+                  <div class="music-meta-data">
+                    <p>By <a href="#" class="music-author">Dbanj</a> | <a href="#" class="music-catagory">Afro Pop</a> | <a href="#" class="music-duration">00:02:56</a></p>
+                  </div>
+                  <!-- Music Player -->
+                  <div class="poca-music-player">
+                    <audio preload="auto" controls>
+                      <source src="audio/oliver.mp3">
+                    </audio>
+                  </div>
+                  <!-- Likes, Share & Download -->
+                  <div class="likes-share-download d-flex align-items-center justify-content-between">
+                    <a href="#"><i class="fa fa-heart" aria-hidden="true"></i> Like (29)</a>
+                    <div>
+                      <a href="#" class="mr-4"><i class="fa fa-share-alt" aria-hidden="true"></i> Share(04)</a>
+                      <a href="#"><i class="fa fa-download" aria-hidden="true"></i> Download (12)</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </body>
-</html>
+      </div>
+
+      <!-- Single Welcome Slide -->
+      <div class="welcome-welcome-slide bg-img bg-overlay" style="background-image: url(img/bg-img/2.jpg);">
+        <div class="container h-100">
+          <div class="row h-100 align-items-center">
+            <div class="col-12">
+              <!-- Welcome Text -->
+              <div class="welcome-text">
+                <h2 data-animation="fadeInUp" data-delay="100ms">Listen Now</h2>
+                <h5 data-animation="fadeInUp" data-delay="300ms">Please schedule a podcast post, to make it visible here.</h5>
+                <div class="welcome-btn-group">
+                  <a href="#" class="btn poca-btn m-2 ml-0 active" data-animation="fadeInUp" data-delay="500ms">Subscribe with iTunes</a>
+                  <a href="#" class="btn poca-btn btn-2 m-2" data-animation="fadeInUp" data-delay="700ms">Subscribe with RSS</a>
+                </div>
+              </div>
+              <!-- Welcome Music Area -->
+              <div class="poca-music-area mt-100 d-flex align-items-center flex-wrap" data-animation="fadeInUp" data-delay="900ms">
+                <div class="poca-music-thumbnail">
+                  <img src="./img/bg-img/4.jpg" alt="">
+                </div>
+                <div class="poca-music-content">
+                  <span class="music-published-date">December 8, 2018</span>
+                  <h2>Episode 202 - The Last Blockbuster</h2>
+                  <div class="music-meta-data">
+                    <p>By <a href="#" class="music-author">Admin</a> | <a href="#" class="music-catagory">Tutorials</a> | <a href="#" class="music-duration">00:02:56</a></p>
+                  </div>
+                  <!-- Music Player -->
+                  <div class="poca-music-player">
+                    <audio preload="auto" controls>
+                      <source src="audio/dummy-audio.mp3">
+                    </audio>
+                  </div>
+                  <!-- Likes, Share & Download -->
+                  <div class="likes-share-download d-flex align-items-center justify-content-between">
+                    <a href="#"><i class="fa fa-heart" aria-hidden="true"></i> Like (29)</a>
+                    <div>
+                      <a href="#" class="mr-4"><i class="fa fa-share-alt" aria-hidden="true"></i> Share(04)</a>
+                      <a href="#"><i class="fa fa-download" aria-hidden="true"></i> Download (12)</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Single Welcome Slide -->
+      <div class="welcome-welcome-slide bg-img bg-overlay" style="background-image: url(img/bg-img/3.jpg);">
+        <div class="container h-100">
+          <div class="row h-100 align-items-center">
+            <div class="col-12">
+              <!-- Welcome Text -->
+              <div class="welcome-text">
+                <h2 data-animation="fadeInUp" data-delay="100ms">Discover Today</h2>
+                <h5 data-animation="fadeInUp" data-delay="300ms">Please schedule a podcast post, to make it visible here.</h5>
+                <div class="welcome-btn-group">
+                  <a href="#" class="btn poca-btn m-2 ml-0 active" data-animation="fadeInUp" data-delay="500ms">Subscribe with iTunes</a>
+                  <a href="#" class="btn poca-btn btn-2 m-2" data-animation="fadeInUp" data-delay="700ms">Subscribe with RSS</a>
+                </div>
+              </div>
+              <!-- Welcome Music Area -->
+              <div class="poca-music-area mt-100 d-flex align-items-center flex-wrap" data-animation="fadeInUp" data-delay="900ms">
+                <div class="poca-music-thumbnail">
+                  <img src="./img/bg-img/4.jpg" alt="">
+                </div>
+                <div class="poca-music-content">
+                  <span class="music-published-date">December 7, 2018</span>
+                  <h2>Episode 201 - The Last Blockbuster</h2>
+                  <div class="music-meta-data">
+                    <p>By <a href="#" class="music-author">Admin</a> | <a href="#" class="music-catagory">Tutorials</a> | <a href="#" class="music-duration">00:02:56</a></p>
+                  </div>
+                  <!-- Music Player -->
+                  <div class="poca-music-player">
+                    <audio preload="auto" controls>
+                      <source src="audio/dummy-audio.mp3">
+                    </audio>
+                  </div>
+                  <!-- Likes, Share & Download -->
+                  <div class="likes-share-download d-flex align-items-center justify-content-between">
+                    <a href="#"><i class="fa fa-heart" aria-hidden="true"></i> Like (29)</a>
+                    <div>
+                      <a href="#" class="mr-4"><i class="fa fa-share-alt" aria-hidden="true"></i> Share(04)</a>
+                      <a href="#"><i class="fa fa-download" aria-hidden="true"></i> Download (12)</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- ***** Welcome Area End ***** -->
+  @endsection
+  @endsection

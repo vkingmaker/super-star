@@ -23,6 +23,8 @@ Route::post('/starrecords/photos', 'PhotoController@store');
 
 Route::post('/starrecords/tours', 'TourController@store');
 
+Route::get('/starrecords/videos', 'VideoController@index');
+
 Route::patch('/starrecords/videos/{video}', 'VideoController@update');
 
 Route::delete('/starrecords/videos/{video}', 'VideoController@destroy');
@@ -34,3 +36,7 @@ Route::patch('/starrecords/musics/{music}/like', 'MusicController@update');
 Route::delete('/starrecords/musics/{music}', 'MusicController@destroy');
 
 
+
+Auth::routes();
+
+Route::get('/starrecords', 'HomeController@index')->name('starrecords');

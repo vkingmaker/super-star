@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 class VideoController extends Controller
 {
 
+    public function index()
+    {
+        $videos = Video::all();
+
+        return view('superstar.videos', compact('videos'));
+    }
+
     public function store()
     {
         $this->validateUrl();
