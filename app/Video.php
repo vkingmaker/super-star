@@ -19,9 +19,9 @@ class Video extends Model
     {
         $this->viewers_feedback()->create([
 
-            'video_id' => factory('App\Video')->create()->id,
+            'video_id' => $this->id,
 
-            'user_id' => factory('App\User')->create()->id,
+            'user_id' => auth()->id(),
 
             'comment' =>  $comment,
         ]);

@@ -29,7 +29,7 @@
                         <div class="classynav">
                             <ul id="nav">
                                 <li><a href="/starrecords">Dashboard</a></li>
-                                <li><a href="/starrecords/musics">Music</a></li>
+                                <li class="current-item"><a href="/starrecords/musics">Music</a></li>
                                 <li><a href="/starrecords/videos">Videos</a></li>
                                 <li><a href="/starrecords/photos">Pictures</a></li>
                                 <li><a href="/starrecords/tours">Tour</a></li>
@@ -76,7 +76,7 @@
         <div class="container h-100">
           <div class="row h-100 align-items-center">
             <div class="col-12">
-              <h2 class="title mt-70">Trending Video</h2>
+              <h2 class="title mt-70">Music</h2>
             </div>
           </div>
         </div>
@@ -94,20 +94,49 @@
     </div>
     <!-- ***** Breadcrumb Area End ***** -->
 @endsection
+
 @section('content')
-<ul class="media-collection">
-    @forelse ($videos as $video)
-    <li class="mb-3">
-    <a href="{{$video->path()}}">
-        <video width="100%" poster="{{$video->thumb_nail}}" controls>
-            <source src="{{$video->url}}" type="video/mp4">
-            Your browser does not support HTML5 video.
-            </video>
-        <p style="max-width:80%;" class="text-truncate">{{$video->title}}</p>
-        </a>
-    </li>
-    @empty
-        <p class="lead text-center d-block w-100">No Video has been uploaded</p>
-    @endforelse
-    </ul>
+
+@forelse ($musics as $music)
+
+<div class="poca-featured-music-area mt-50">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="poca-music-area box-shadow d-flex align-items-center flex-wrap border" data-animation="fadeInUp" data-delay="900ms">
+            <div class="poca-music-thumbnail">
+              <img src="{{asset($music->albumart)}}" alt="">
+            </div>
+            <div class="poca-music-content">
+              <span class="music-published-date">December 9, 2018</span>
+            <h2>{{$music->title}}</h2>
+              <div class="music-meta-data">
+                <p>By <a href="#" class="music-author">Dbanj</a> | <a href="#" class="music-catagory">Afro Pop</a> | <a href="#" class="music-duration">00:02:56</a></p>
+              </div>
+              <!-- Music Player -->
+              <div class="poca-music-player">
+                <audio preload="auto" controls>
+                  <source src="{{asset($music->url)}}">
+                </audio>
+              </div>
+              <!-- Likes, Share & Download -->
+              <div class="likes-share-download d-flex align-items-center justify-content-between">
+              <form action="{{$music->path().'/like'}}" method="POST" id="{{$music->id}}">
+                    @method('PATCH')
+                    @csrf
+                     <a onclick="document.getElementById({{$music->id}}).submit()" style="cursor:pointer;"><i class="fa fa-heart" aria-hidden="true"></i> Like ({{$music->likes}})</a>
+                  </form>
+                <div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+@empty
+  <p class="lead text-center">No Music has been uploaded</p>
+@endforelse
+
 @endsection

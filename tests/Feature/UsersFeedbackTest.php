@@ -14,7 +14,8 @@ class UsersFeedbackTest extends TestCase
     /** @test */
     public function a_user_can_add_a_comment()
     {
-        $this->withoutExceptionHandling();
+
+        $this->be(factory('App\User')->create())->withoutExceptionHandling();
 
         $video = factory('App\Video')->create();
 

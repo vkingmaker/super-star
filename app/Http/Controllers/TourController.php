@@ -14,17 +14,9 @@ class TourController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $tours = Tour::orderBy('id', 'desc')->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('superstar.tour', compact('tours'));
     }
 
     /**
@@ -42,50 +34,5 @@ class TourController extends Controller
         Tour::create(request(['venue', 'date']));
 
         return redirect('starrecords');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Tour  $tour
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tour $tour)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Tour  $tour
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tour $tour)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tour  $tour
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Tour $tour)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Tour  $tour
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Tour $tour)
-    {
-        //
     }
 }

@@ -28,11 +28,6 @@
                     <!-- Nav Start -->
                     <div class="classynav">
                         <ul id="nav">
-                            <li><a href="/starrecords">Dashboard</a></li>
-                            <li><a href="/starrecords/musics">Music</a></li>
-                            <li><a href="/starrecords/videos">Videos</a></li>
-                            <li class="current-item"><a href="/starecords/photos">Pictures</a></li>
-                            <li><a href="/starrecords/tours">Tour</a></li>
                             @guest
                             <li>
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -76,7 +71,7 @@
     <div class="container h-100">
         <div class="row h-100 align-items-center">
             <div class="col-12">
-                <h2 class="title mt-70">Photo Gallery</h2>
+            <h2 class="title mt-70">Subscription</h2>
             </div>
         </div>
     </div>
@@ -96,44 +91,42 @@
 @endsection
 
 @section('content')
-<div class="container">
-    <div class="row poca-portfolio">
-    @forelse ($photos as $photo)
+<section class="poca-contact-area mt-50 mb-100">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+            <div class="contact-form">
+                <h5 class="mb-30">Your payment information</h5>
 
-              <!-- Single gallery Item -->
-              <div class="col-12 col-md-6 single_gallery_item wow fadeInUp" data-wow-delay="0.2s">
-                <!-- Welcome Music Area -->
-                <div class="poca-music-area style-2 d-flex align-items-center flex-wrap">
-                  <div class="poca-music-thumbnail">
-                    <img src="{{asset($photo->url)}}" alt="">
-                  </div>
-                  <div class="poca-music-content text-center">
-                  <p>{{$photo->caption}}</p>
-
-                    <div class="likes-share-download d-flex align-items-center justify-content-between">
-                    <form action="{{$photo->path().'/like'}}" method="POST" id="like-{{$photo->id}}">
-                            @method('PATCH')
-                            @csrf
-                                <a onclick="document.getElementById('like-{{$photo->id}}').submit()" style="cursor:pointer;"><i class="fa fa-heart" aria-hidden="true"></i> Like ({{$photo->likes}})</a>
-                            </form>
-                      <div>
-                        @if (auth()->user()->isAdmin())
-                        <form action="{{$photo->path()}}" method="POST" id="del-{{$photo->id}}">
-                            @method('DELETE')
-                            @csrf
-                                <a onclick="document.getElementById('del-{{$photo->id}}').submit()" style="cursor:pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                            </form>
-                        @endif
+                <!-- Form -->
+                <form action="/starrecords/subscription" method="POST">
+                    @csrf
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <input type="text" pattern="[0-9]{13,16}" name="cardNumber" class="form-control mb-30" placeholder="Card Number">
+                    </div>
+                    <div class="col-lg-3">
+                      <input type="number" name="postcode" class="form-control mb-30" placeholder="Postal/Zip" min="10000">
+                    </div>
+                    <div class="col-lg-3">
+                      <input type="number" name="cvv" class="form-control mb-30" placeholder="CVV">
+                    </div>
+                    <div class="col-lg-5">
+                        <input type="number" name="month" class="form-control mb-30" placeholder="month" min="1" max="31">
                       </div>
+                    <div class="col-lg-2">
+                        <input type="number" name="year" class="form-control mb-30" placeholder="Year" min="2019" max="2039">
+                      </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn poca-btn mt-30">Subscribe</button>
                     </div>
                   </div>
-                </div>
+                </form>
+
               </div>
+        </div>
+      </div>
 
-    @empty
-        <p class="lead text-center d-block w-100">No picture has been added.</p>
-    @endforelse
     </div>
-</div>
-
+  </section>
 @endsection

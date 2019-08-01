@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Music extends Model
 {
-    protected $fillable = ['title'];
+    protected $guarded = [];
 
 
     public function path()

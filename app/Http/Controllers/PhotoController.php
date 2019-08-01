@@ -14,17 +14,9 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $photos = Photo::orderBy('id', 'desc')->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('superstar.image', compact('photos'));
     }
 
     /**
@@ -35,7 +27,6 @@ class PhotoController extends Controller
      */
     public function store()
     {
-        // dd(request()->all());
         $photo = request()->validate([
 
             'caption' => 'required',
@@ -49,37 +40,17 @@ class PhotoController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Photo  $photo
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Photo $photo)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Photo  $photo
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Photo $photo)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Photo $photo)
+    public function update(Photo $photo)
     {
-        //
+        $photo->update(['likes' => (int) ++$photo->likes]);
+
+        return redirect('/starrecords/photos');
     }
 
     /**
@@ -90,6 +61,8 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
-        //
+        $photo->delete();
+
+        return redirect('/starrecords/photos');
     }
 }

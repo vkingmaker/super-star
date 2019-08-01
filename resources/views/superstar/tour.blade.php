@@ -32,7 +32,7 @@
                                 <li><a href="/starrecords/musics">Music</a></li>
                                 <li><a href="/starrecords/videos">Videos</a></li>
                                 <li><a href="/starrecords/photos">Pictures</a></li>
-                                <li><a href="/starrecords/tours">Tour</a></li>
+                                <li class="current-item"><a href="/starrecords/tours">Tour</a></li>
                                 @guest
                                 <li>
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -76,7 +76,7 @@
         <div class="container h-100">
           <div class="row h-100 align-items-center">
             <div class="col-12">
-              <h2 class="title mt-70">Trending Video</h2>
+              <h2 class="title mt-70">Tours</h2>
             </div>
           </div>
         </div>
@@ -95,19 +95,26 @@
     <!-- ***** Breadcrumb Area End ***** -->
 @endsection
 @section('content')
-<ul class="media-collection">
-    @forelse ($videos as $video)
-    <li class="mb-3">
-    <a href="{{$video->path()}}">
-        <video width="100%" poster="{{$video->thumb_nail}}" controls>
-            <source src="{{$video->url}}" type="video/mp4">
-            Your browser does not support HTML5 video.
-            </video>
-        <p style="max-width:80%;" class="text-truncate">{{$video->title}}</p>
-        </a>
-    </li>
-    @empty
-        <p class="lead text-center d-block w-100">No Video has been uploaded</p>
-    @endforelse
-    </ul>
+@forelse ($tours as $tour)
+<div class="poca-featured-music-area mt-50">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="poca-music-area box-shadow d-flex align-items-center flex-wrap border" data-animation="fadeInUp" data-delay="900ms">
+                <div class="poca-music-thumbnail">
+                  <img src="./img/bg-img/4.jpg" alt="">
+                </div>
+                <div class="poca-music-content">
+                <span class="music-published-date">{{$tour->date}}</span>
+                <h2>{{$tour->venue}}</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+@empty
+    <h2 class="lead text-center w-100">There are no tours yet!</h2>
+@endforelse
+
 @endsection

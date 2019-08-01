@@ -37,7 +37,6 @@
         }
 
         .media-collection a {
-
             text-decoration: none;
         }
         video{

@@ -11,7 +11,7 @@ class VideoController extends Controller
 
     public function index()
     {
-        $videos = Video::all();
+        $videos = Video::orderBy('id', 'DESC')->get();
 
         return view('superstar.videos', compact('videos'));
     }
@@ -31,6 +31,14 @@ class VideoController extends Controller
         Video::create(request(['title', 'url', 'thumb_nail']));
 
         return redirect('/starrecords');
+    }
+
+
+    public function show(Video $video)
+    {
+        // $comment = $video->viewers_feedback->all();
+
+        return view('superstar.video', compact('video'));
     }
 
 

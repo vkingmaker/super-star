@@ -16,6 +16,8 @@ class CreateMusicsTable extends Migration
         Schema::create('musics', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->string('url');
+            $table->string('albumart')->nullable();
             $table->unsignedInteger('likes')->default(0);
             $table->timestamps();
         });

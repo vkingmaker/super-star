@@ -29,10 +29,10 @@
                         <div class="classynav">
                             <ul id="nav">
                                 <li class="current-item"><a href="/starrecords">Dashboard</a></li>
-                                <li><a href="./music.html">Music</a></li>
+                                <li><a href="/starrecords/musics">Music</a></li>
                                 <li><a href="/starrecords/videos">Videos</a></li>
-                                <li><a href="./pictures.html">Pictures</a></li>
-                                <li><a href="./tour.html">Tour</a></li>
+                                <li><a href="/starrecords/photos">Pictures</a></li>
+                                <li><a href="/starrecords/tours">Tour</a></li>
                                 @guest
                                     <li>
                                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -101,6 +101,8 @@
     <!-- ***** Header Area End ***** -->
 @section('content')
 
+
+
  <!-- ***** Featured Music Area Start ***** -->
 <div class="poca-featured-music-area mt-50">
     <div class="container">
@@ -141,29 +143,34 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md">
-            <!-- Button trigger modal -->
-            <div style="display: flex; justify-content: space-between;">
-                <button type="button" class="btn btn-primary add-video-btn"
-                    style="width: 250px;height: 70px;border-radius: 100px;" data-toggle="modal"
-                    data-target="#musicModal">
-                    Add Music
-                </button>
-                <button type="button" class="btn btn-primary add-video-btn"
-                    style="width: 250px;height: 70px;border-radius: 100px;" data-toggle="modal"
-                    data-target="#videoModal">
-                    Add Video
-                </button>
-                <button type="button" class="btn btn-primary add-video-btn"
-                    style="width: 250px;height: 70px;border-radius: 100px;" data-toggle="modal"
-                    data-target="#pictureModal">
-                    Add Picture
-                </button>
-                <button type="button" class="btn btn-primary add-video-btn"
-                    style="width: 250px;height: 70px;border-radius: 100px;" data-toggle="modal"
-                    data-target="#tourModal">
-                    Tour
-                </button>
-            </div>
+
+                @if (auth()->user()->isAdmin())
+
+                 <div style="display: flex; justify-content: space-between;">
+                    <button type="button" class="btn btn-primary add-video-btn"
+                        style="width: 250px;height: 70px;border-radius: 100px;" data-toggle="modal"
+                        data-target="#musicModal">
+                        Add Music
+                    </button>
+                    <button type="button" class="btn btn-primary add-video-btn"
+                        style="width: 250px;height: 70px;border-radius: 100px;" data-toggle="modal"
+                        data-target="#videoModal">
+                        Add Video
+                    </button>
+                    <button type="button" class="btn btn-primary add-video-btn"
+                        style="width: 250px;height: 70px;border-radius: 100px;" data-toggle="modal"
+                        data-target="#pictureModal">
+                        Add Picture
+                    </button>
+                    <button type="button" class="btn btn-primary add-video-btn"
+                        style="width: 250px;height: 70px;border-radius: 100px;" data-toggle="modal"
+                        data-target="#tourModal">
+                        Tour
+                    </button>
+                </div>
+                @else
+                    <h1>You are not an Admin</h1>
+                @endif
 
             <!-- Modal -->
             <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel"
@@ -222,7 +229,8 @@
                         <div class="modal-body">
                             <div class="contact-form">
                                 <!-- Form -->
-                                <form action="#" method="post">
+                                <form action="/starrecords/musics" method="post">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <input type="text" name="title" class="form-control mb-30"
@@ -232,10 +240,14 @@
                                             <input type="text" name="url" class="form-control mb-30"
                                                 placeholder="url">
                                         </div>
+                                        <div class="col-lg-12">
+                                            <input type="text" name="albumart" class="form-control mb-30"
+                                                placeholder="album art">
+                                        </div>
                                         <div class="modal-footer" style="border-top: none;right:-5px;width:100%;">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                            <button type="submit" class="btn btn-primary">Save</button>
                                         </div>
                                     </div>
                                 </form>
@@ -258,7 +270,8 @@
                         <div class="modal-body">
                             <div class="contact-form">
                                 <!-- Form -->
-                                <form action="#" method="post">
+                                <form action="/starrecords/photos" method="post">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <input type="text" name="url" class="form-control mb-30"
@@ -271,7 +284,7 @@
                                         <div class="modal-footer" style="border-top: none;right:-5px;width:100%;">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                            <button type="submit" class="btn btn-primary">Save</button>
                                         </div>
                                     </div>
                                 </form>
@@ -294,7 +307,8 @@
                         <div class="modal-body">
                             <div class="contact-form">
                                 <!-- Form -->
-                                <form action="#" method="post">
+                                <form action="/starrecords/tours" method="post">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <input type="date" name="date" class="form-control mb-30"
@@ -307,7 +321,7 @@
                                         <div class="modal-footer" style="border-top: none;right:-5px;width:100%;">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                            <button type="submit" class="btn btn-primary">Save</button>
                                         </div>
                                     </div>
                                 </form>

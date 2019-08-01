@@ -14,7 +14,9 @@ class MusicController extends Controller
      */
     public function index()
     {
-        //
+        $musics = Music::orderBy('id', 'desc')->get();
+
+        return view('superstar.music', compact('musics'));
     }
 
     /**
@@ -35,7 +37,8 @@ class MusicController extends Controller
      */
     public function store()
     {
-        Music::create(request()->validate(['title' => 'required|min:1']));
+        $this->validateUrl(request('url'));
+        Music::create(request()->validate(['title' => 'required|min:1','url' => 'required', 'albumart' => 'sometimes']));
 
         return redirect('/starrecords');
     }
@@ -72,6 +75,8 @@ class MusicController extends Controller
     public function update(Music $music)
     {
         $music->update(['likes' => (int) ++$music->likes]);
+
+        return redirect('/starrecords/musics');
     }
 
     /**
@@ -85,5 +90,10 @@ class MusicController extends Controller
         $music->delete();
 
         return redirect('/starrecords');
+    }
+
+    protected function validateUrl()
+    {
+        if(! filter_var(request('url'), FILTER_VALIDATE_URL)) abort(403);
     }
 }

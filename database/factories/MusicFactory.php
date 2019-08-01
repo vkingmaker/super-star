@@ -9,6 +9,10 @@ $factory->define(Music::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence,
 
+        'url' => $faker->url,
+
+        'albumart' => $faker->url,
+
         'likes' => 0,
     ];
 });
